@@ -28,7 +28,7 @@ function getRandomPosition(maxX, maxY){
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
-  if (!data || !data.x || !data.y || !data.bombs) {
+  if (!data || !data.x || !data.y || !data.bombs || !data.user) {
     console.error('Missing field');
     callback(null, {
       statusCode: 400,
@@ -41,12 +41,12 @@ module.exports.create = (event, context, callback) => {
   const bombs = getBombs(data.x, data.y, data.bombs);
 
   const params = {
-    TableName: process.env.DYNAMODB_TABLE,
+    TableName: "Games",
     Item: {
       id: uuid.v1(),
-      user: data.user,
       flags: [],
       bombs: bombs,
+      user: data.user,
       visibles: [],
       x: data.x,
       y: data.y,
