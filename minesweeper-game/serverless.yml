@@ -31,7 +31,7 @@ functions:
     handler: games/list.list
     events:
       - http:
-          path: games
+          path: games/{user}
           method: get
           cors: true
 
@@ -76,4 +76,4 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+        TableName: "Games"

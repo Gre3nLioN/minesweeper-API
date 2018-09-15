@@ -3,11 +3,14 @@
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const params = {
-  TableName: process.env.DYNAMODB_TABLE,
-};
 
 module.exports.list = (event, context, callback) => {
+  const params = {
+    TableName: "Games",
+    Key:{
+      "user": event.pathParameters.user
+    }
+  };
   // fetch all todos from the database
   dynamoDb.scan(params, (error, result) => {
     // handle potential errors
