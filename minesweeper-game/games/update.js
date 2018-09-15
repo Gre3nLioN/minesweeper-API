@@ -9,7 +9,7 @@ module.exports.update = (event, context, callback) => {
   const data = JSON.parse(event.body);
 
   // validation
-  if (!data || !data.x || !data.y || !data.boms) {
+  if (!data || data.visibles || !data.time || !data.flags) {
     console.error('Missin Failed');
     callback(null, {
       statusCode: 400,
@@ -20,7 +20,7 @@ module.exports.update = (event, context, callback) => {
   }
 
   const params = {
-    TableName: process.env.DYNAMODB_TABLE,
+    TableName: "Games",
     Key: {
       id: event.pathParameters.id,
     },
