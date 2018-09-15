@@ -12,7 +12,7 @@ module.exports.get = (event, context, callback) => {
     },
   };
 
-  // fetch todo from the database
+  // fetch game from the database
   dynamoDb.get(params, (error, result) => {
     // handle potential errors
     if (error) {
@@ -20,7 +20,7 @@ module.exports.get = (event, context, callback) => {
       callback(null, {
         statusCode: error.statusCode || 501,
         headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t fetch the todo item.',
+        body: 'Couldn\'t fetch the game item.',
       });
       return;
     }
