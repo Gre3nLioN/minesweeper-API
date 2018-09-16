@@ -1,22 +1,10 @@
 'use strict';
 
 const bcrypt = require('bcrypt');
-const crypto = require('crypto');
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const saltRounds = 5;
-
-function getPassword(pass) {
-  bcrypt.hash(pass, saltRounds).then(function(hash) {
-    return hash;
-  });
-}
-function getToken() {
-  crypto.randomBytes(48, function(err, buffer) {
-    return buffer.toString('hex');
-  });
-}
 
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime();
@@ -26,7 +14,7 @@ module.exports.create = (event, context, callback) => {
     callback(null, {
       statusCode: 400,
       headers: { 'Content-Type': 'text/plain' },
-      body: 'Couldn\'t create a user.',
+      body: 'Couldn\'t create a user. - filter',
     });
     return;
   }
@@ -62,21 +50,20 @@ module.exports.create = (event, context, callback) => {
           callback(null, {
             statusCode: error.statusCode || 501,
             headers: { 'Content-Type': 'text/plain' },
-            body: 'Couldn\'t create the user item.',
+            body: 'Couldn\'t create the user item. - password',
           });
           return;
       }
 
     } else {
       // new user
-      const password = getPassword(data.password);
-      const token = getToken();
+      const password = bcrypt.hashSync(data.password, saltRounds);
 
       params = {
+        TableName: "Users",
         Item: {
           name: data.name,
           password: password,
-          token: token,
           games: [],
           createdAt: timestamp,
           updatedAt: timestamp,
@@ -91,12 +78,13 @@ module.exports.create = (event, context, callback) => {
           callback(null, {
             statusCode: error.statusCode || 501,
             headers: { 'Content-Type': 'text/plain' },
-            body: 'Couldn\'t create the user item.',
+            body: 'Couldn\'t create the user item. -new',
           });
           return;
         }
 
         // create a response
+        delete params.Item.password;
         const response = {
           statusCode: 200,
           body: JSON.stringify(params.Item),

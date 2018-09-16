@@ -31,7 +31,7 @@ functions:
     handler: users/update.update
     events:
       - http:
-          path: users/{token}
+          path: users/{name}
           method: put
           cors: true
 

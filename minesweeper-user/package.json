@@ -5,7 +5,6 @@
   "author": "",
   "dependencies": {
     "bcrypt": "^3.0.0",
-    "crypto": "^1.0.1",
     "uuid": "^2.0.3"
   }
 }

@@ -9,7 +9,7 @@ module.exports.update = (event, context, callback) => {
   const data = JSON.parse(event.body);
 
   // validation
-  if (!data || !event.pathParameters.token || !data.games) {
+  if (!data || !event.pathParameters.name || !data.games) {
     console.error('Missin Failed');
     callback(null, {
       statusCode: 400,
@@ -22,13 +22,13 @@ module.exports.update = (event, context, callback) => {
   const params = {
     TableName: "Users",
     Key: {
-      token: event.pathParameters.token,
+      name: event.pathParameters.name,
     },
     ExpressionAttributeValues: {
       ':games': data.games,
       ':updatedAt': timestamp,
     },
-    UpdateExpression: 'SET game = :game, updatedAt = :updatedAt',
+    UpdateExpression: 'SET game = :games, updatedAt = :updatedAt',
     ReturnValues: 'ALL_NEW',
   };
 
