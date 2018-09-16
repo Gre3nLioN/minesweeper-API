@@ -31,7 +31,7 @@ functions:
     handler: games/list.list
     events:
       - http:
-          path: games/{user}
+          path: user-games/{user}
           method: get
           cors: true
 
