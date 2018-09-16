@@ -69,7 +69,7 @@ MinesSweeper.prototype.updateUser = function(name, games) {
 };
 
 MinesSweeper.prototype.createFlag = function(x, y) {
-  let flag = this.activeGame.flags.find(flag => flag.position === [x, y]);
+  let flag = this.activeGame.flags.findIndex(flag => flag.position === [x, y]);
 
   if(!flag) {
     // new flag
@@ -77,7 +77,8 @@ MinesSweeper.prototype.createFlag = function(x, y) {
       'type': 'mark',
       'position': [x, y];
     });
-      
+  } else {
+
   }
 };
 
