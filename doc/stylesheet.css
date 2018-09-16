@@ -1,0 +1,63 @@
+body {
+  background: #4C0399;
+  color: white;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+#game-board {
+  float: left;
+  width: 88%;
+}
+
+div#games {
+  float: left;
+  width: 10%;
+}
+
+div#games ul {
+  list-style: none;
+  padding-left: 0;
+  margin-right: 2%;
+}
+
+div#games ul .game {
+  background: orange;
+  padding: 0.2em;
+  margin: 0.1em 0;
+}
+
+form#create-game-form {
+  float: left;
+  width: 10%;
+}
+
+#game-board .row {
+  display: block;
+  clear: both;
+}
+
+#game-board .cell {
+  display: block;
+  width: 1em;
+  height: 1em;
+  background: grey;
+  float: left;
+  border: 1px solid #C7C6C8;
+  cursor: pointer;
+}
+
+#game-board #clock {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 2em;
+  background: orange;
+  display: block;
+}
