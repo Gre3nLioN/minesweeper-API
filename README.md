@@ -25,7 +25,9 @@ I wanted to test a full serverless aplication and I tought this was a good oport
 
 # How to run
 - Go to each lambda folder and run (having aws already setuped)
-  ```
-serverless deploy
+
 ```
+  serverless deploy
+```
+
 - FE is an static site
