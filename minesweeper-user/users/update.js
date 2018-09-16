@@ -28,7 +28,7 @@ module.exports.update = (event, context, callback) => {
       ':games': data.games,
       ':updatedAt': timestamp,
     },
-    UpdateExpression: 'SET game = :games, updatedAt = :updatedAt',
+    UpdateExpression: 'SET games = :games, updatedAt = :updatedAt',
     ReturnValues: 'ALL_NEW',
   };
 
