@@ -1,6 +1,7 @@
 function MinesSweeperAPI () {
   this.gameAPI = "https://bjyw7641si.execute-api.us-east-1.amazonaws.com/dev/games";
   this.userAPI = "https://ob15x9qjrg.execute-api.us-east-1.amazonaws.com/dev/users";
+  this.userGamesAPI = "https://bjyw7641si.execute-api.us-east-1.amazonaws.com/dev/user-games";
 }
 
 MinesSweeperAPI.prototype.createGame = function(x, y, bombs, user) {
@@ -80,8 +81,8 @@ MinesSweeperAPI.prototype.getGame = function(id) {
     });
 };
 
-MinesSweeperAPI.prototype.getUserGames = function(user) {
-  return fetch(this.gameAPI + '/' + user, {
+MinesSweeperAPI.prototype.getUserGames = function(name) {
+  return fetch(this.userGamesAPI + '/' + name, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
