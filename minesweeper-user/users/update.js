@@ -13,7 +13,10 @@ module.exports.update = (event, context, callback) => {
     console.error('Missin Failed');
     callback(null, {
       statusCode: 400,
-      headers: { 'Content-Type': 'text/plain' },
+      headers: {
+        "Access-Control-Allow-Origin" : "*",
+        "Access-Control-Allow-Credentials" : true
+      },
       body: 'Couldn\'t update the user item.',
     });
     return;
@@ -39,7 +42,10 @@ module.exports.update = (event, context, callback) => {
       console.error(error);
       callback(null, {
         statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
+        headers: {
+          "Access-Control-Allow-Origin" : "*",
+          "Access-Control-Allow-Credentials" : true
+        },
         body: 'Couldn\'t fetch the user item.',
       });
       return;

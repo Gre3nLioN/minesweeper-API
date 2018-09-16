@@ -13,7 +13,10 @@ module.exports.create = (event, context, callback) => {
     console.error('Missing field');
     callback(null, {
       statusCode: 400,
-      headers: { 'Content-Type': 'text/plain' },
+      headers: {
+        "Access-Control-Allow-Origin" : "*",
+        "Access-Control-Allow-Credentials" : true
+      },
       body: 'Couldn\'t create a user. - filter',
     });
     return;
@@ -30,7 +33,10 @@ module.exports.create = (event, context, callback) => {
       console.error(error);
       callback(null, {
         statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
+        headers: {
+          "Access-Control-Allow-Origin" : "*",
+          "Access-Control-Allow-Credentials" : true
+        },
         body: 'Couldn\'t fetch the user item.',
       });
       return;
@@ -40,16 +46,22 @@ module.exports.create = (event, context, callback) => {
       if(bcrypt.compareSync(data.password, result.password)) {
         // login
         callback(null, {
-          statusCode: 400,
-          headers: { 'Content-Type': 'text/plain' },
-          body: result,
+          statusCode: 200,
+          headers: {
+            "Access-Control-Allow-Origin" : "*",
+            "Access-Control-Allow-Credentials" : true
+          },
+          body:result
         });
         return;
       } else {
           // invalid password
           callback(null, {
             statusCode: error.statusCode || 501,
-            headers: { 'Content-Type': 'text/plain' },
+            headers: {
+              "Access-Control-Allow-Origin" : "*",
+              "Access-Control-Allow-Credentials" : true
+            },
             body: 'Couldn\'t create the user item. - password',
           });
           return;
@@ -77,7 +89,10 @@ module.exports.create = (event, context, callback) => {
           console.error(error);
           callback(null, {
             statusCode: error.statusCode || 501,
-            headers: { 'Content-Type': 'text/plain' },
+            headers: {
+              "Access-Control-Allow-Origin" : "*",
+              "Access-Control-Allow-Credentials" : true
+            },
             body: 'Couldn\'t create the user item. -new',
           });
           return;
@@ -87,6 +102,10 @@ module.exports.create = (event, context, callback) => {
         delete params.Item.password;
         const response = {
           statusCode: 200,
+          headers: {
+            "Access-Control-Allow-Origin" : "*",
+            "Access-Control-Allow-Credentials" : true
+          },
           body: JSON.stringify(params.Item),
         };
         callback(null, response);
