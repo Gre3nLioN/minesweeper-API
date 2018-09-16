@@ -21,9 +21,9 @@ Minesweeper game
 - Write README + Deploy github page
 
 ## Why lambdas
-I wanted to test a full serverless aplication and I tought this was a good oportinity to try it, also I didn't want to setup an ec2 instance + codeDeploy which requires time and in this case I didn't have it. 
+I wanted to test a full serverless application and I thought this was a good opportinity to try it. Also, I didn't want to setup an ec2 instance + codeDeploy, which requires time didn't have. 
 
-## Why lambdas
+## Why github pages
 Easy to setup, fast and simple, no hosting required.
 
 # How to run
