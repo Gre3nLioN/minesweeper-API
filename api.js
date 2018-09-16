@@ -1,7 +1,7 @@
 function MinesSweeperAPI () {
-  this.gameAPI = "https://bjyw7641si.execute-api.us-east-1.amazonaws.com/dev/games";
+  this.gameAPI = "https://sujmxxtpjb.execute-api.us-east-1.amazonaws.com/dev/games";
   this.userAPI = "https://ob15x9qjrg.execute-api.us-east-1.amazonaws.com/dev/users";
-  this.userGamesAPI = "https://bjyw7641si.execute-api.us-east-1.amazonaws.com/dev/user-games";
+  this.userGamesAPI = "https://sujmxxtpjb.execute-api.us-east-1.amazonaws.com/dev/user-games";
 }
 
 MinesSweeperAPI.prototype.createGame = function(x, y, bombs, user) {
@@ -101,7 +101,6 @@ MinesSweeperAPI.prototype.createUser = function(name, password) {
   return fetch(this.userAPI, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(
