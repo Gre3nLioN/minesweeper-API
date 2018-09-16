@@ -50,16 +50,7 @@ MinesSweeper.prototype.getUserGames = function(name) {
       m.games = games;
 
       // layout
-      let gamesEl = document.querySelector('#games');
-      gamesEl.appendChild(document.createElement('ul'));
-
-      for (let i = 0; i < games.length; i++) { 
-        let newGame = document.createElement('div');
-        newGame.classList.add('game');
-        newGame.classList.add('index-' + i );
-        newGame.innerHTML = 'Time: ' + games[i].gameTime;
-        gamesEl.querySelector('ul').appendChild(newGame);
-      }
+      m.drawGames(games);
     })
     .catch(function(error) {
       console.log(error);
@@ -116,6 +107,20 @@ MinesSweeper.prototype.drawGame = function(x, y) {
   setInterval(function(){ m.updateClock();  }, 1000);
 };
 
+MinesSweeper.prototype.drawGames = function(games) {
+  let gamesEl = document.querySelector('#games');
+  gamesEl.innerHTML = "";
+  gamesEl.appendChild(document.createElement('ul'));
+
+  for (let i = 0; i < games.length; i++) { 
+    let newGame = document.createElement('div');
+    newGame.classList.add('game');
+    newGame.classList.add('index-' + i );
+    newGame.innerHTML = 'Time: ' + games[i].gameTime;
+    gamesEl.querySelector('ul').appendChild(newGame);
+  }
+};
+
 MinesSweeper.prototype.createFlag = function(x, y) {
   let flag = this.activeGame.flags.findIndex(flag => flag.position === [x, y]);
 
@@ -158,6 +163,15 @@ document.querySelector('#create-game-form').addEventListener('submit', function(
   minesSweeper.createGame(x, y, bombs, minesSweeper.user.name);
 });
 
+document.querySelector('#save-game').addEventListener('click', function(e){
+  e.preventDefault();
+  minesSweeper.updateGame(minesSweeper.activeGame.id, minesSweeper.activeGame.visibles, minesSweeper.activeGame.gameTime, minesSweeper.activeGame.flags);
+
+  // update board
+  let gameIndex = minesSweeper.games.findIndex(game => game.id === minesSweeper.activeGame.id);
+  minesSweeper.games[gameIndex].gameTime = minesSweeper.activeGame.gameTime;
+  minesSweeper.drawGames(minesSweeper.games);
+});
 
 document.addEventListener('click',function(e){
   if(e.target && e.target.matches('.game')){
