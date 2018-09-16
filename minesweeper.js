@@ -47,7 +47,7 @@ MinesSweeper.prototype.getUserGames = function(name) {
   this.API.getUserGames(name)
     .then(function(games) {
       // set game
-      m.games = games;
+      games ? m.games = games : m.games = [];
 
       // layout
       m.drawGames(games);
