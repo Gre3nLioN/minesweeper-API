@@ -50,7 +50,7 @@ module.exports.create = (event, context, callback) => {
       visibles: [],
       x: data.x,
       y: data.y,
-      time: 0,
+      gameTime: 0,
       createdAt: timestamp,
       updatedAt: timestamp,
     },
