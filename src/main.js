@@ -96,4 +96,45 @@ MinesSweeperAPI.prototype.getUserGames = function(user) {
     });
 };
 
+MinesSweeperAPI.prototype.createUser = function(name, password) {
+  return fetch(this.userAPI, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {
+          'name': name,
+          'password': password
+        })
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+};
+
+MinesSweeperAPI.prototype.updateUser = function(name, games) {
+  return fetch(this.userAPI + "/" + name, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {
+          'games': games
+        })
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+};
+
 const API = new MinesSweeperAPI();
